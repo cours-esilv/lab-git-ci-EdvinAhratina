@@ -1,4 +1,4 @@
-name: Build and Test Java Application
+name: Build, Test, and Display Unit Test Results
 
 on:
   push:
@@ -22,4 +22,8 @@ jobs:
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots package
 
-      # Add any additional steps as needed for your application
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        if: always()
+        with:
+          files: target/surefire-reports/**/*.xml
