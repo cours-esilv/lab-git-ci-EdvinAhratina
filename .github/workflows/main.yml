@@ -1,4 +1,4 @@
-name: Build, Test, and Display Unit Test Results
+name: Build, Test, Publish, and Upload Artifact
 
 on:
   push:
@@ -27,3 +27,9 @@ jobs:
         if: always()
         with:
           files: target/surefire-reports/**/*.xml
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2.2.4
+        with:
+          name: my-app-1.0
+          path: target/*
